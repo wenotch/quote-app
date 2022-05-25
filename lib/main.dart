@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quoteapp/quote.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -15,11 +16,39 @@ class QuoteList extends StatefulWidget {
 
 class _QuoteListState extends State<QuoteList> {
 
-  List <String> quotes =[
-    'Ndaboski is the way to go',
-    'Sapa na Bastard, e no dey look face',
-    'I no sabi which quote to use here'
+  List <Quote> quotes =[
+    Quote('Ndaboski is the way to go', 'Danjuma'),
+    Quote(   'Sapa na Bastard, e no dey look face', "Praise"),
+    Quote(  'I no sabi which quote to use here', "Emmanuel")
   ];
+
+  Widget quoteTemplate(quote){
+    return Card(
+      margin: const EdgeInsets.fromLTRB(16, 16,16,0),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Text(
+              quote.text,
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.grey[600]
+            ),
+            ),
+            SizedBox(height: 6),Text(
+              quote.author,
+              style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey[800]
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +59,7 @@ class _QuoteListState extends State<QuoteList> {
         backgroundColor: Colors.redAccent,
       ),
       body: Column(
-        children: quotes.map((quote)=>Text(quote)).toList(),
+        children: quotes.map((quote)=>quoteTemplate(quote)).toList(),
       )
     );
   }
